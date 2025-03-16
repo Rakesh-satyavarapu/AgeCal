@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <link rel="stylesheet" href="age.css">
+</head>
+<body>
+    <input type="date" id="dob" ><br>
+    <button class="btn" onclick="getAge()">submit</button>
+    <div id="age"></div>
+    <script>
+        function getDaysInMonth(year, month) {
+    let date = new Date();
+    date.setFullYear(year, month, 0);
+    return date.getDate();
+}
+        let getAge=()=>{
+            let dob=new Date(document.getElementById("dob").value)
+            let presentDate=new Date()
+            let years=presentDate.getFullYear()-dob.getFullYear()
+            let months=presentDate.getMonth()-dob.getMonth() 
+            if(months<0)
+            {years=years-1;
+            months=months+12;}
+            let days=presentDate.getDate()-dob.getDate()
+            if( days<0){
+                months-=1;
+                days=days+getDaysInMonth(presentDate.getFullYear(),months)
+            }
+            console.log(`age is ${years} years ${months} months and ${days} days`)
+            document.getElementById("age").innerHTML=`<h2>age: ${years} years ${months} months and ${days} days</h2>`
+        }
+    </script>
+</body>
+</html>
